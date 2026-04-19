@@ -14,6 +14,7 @@ class Aspirasi extends Model
         'kategori_id',
         'lokasi',
         'keterangan',
+        'foto',
         'status'
     ];
     public function siswa()

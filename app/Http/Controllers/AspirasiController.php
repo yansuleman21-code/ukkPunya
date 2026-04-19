@@ -25,19 +25,25 @@ class AspirasiController extends Controller
     }
 
     // Simpan data
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $request->validate([
             'kategori_id' => 'required',
             'lokasi' => 'required',
             'keterangan' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048', // Validasi foto
         ]);
+
+        $fotoPath = null;
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('aspirasi', 'public');
+        }
 
         Aspirasi::create([
             'siswa_id' => Auth::user()->siswa->id,
             'kategori_id' => $request->kategori_id,
             'lokasi' => $request->lokasi,
             'keterangan' => $request->keterangan,
+            'foto' => $fotoPath,
             'status' => 'menunggu'
         ]);
 

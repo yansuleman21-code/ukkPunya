@@ -1,32 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Buat Laporan Aspirasi Baru</h2>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Kirim Aspirasi Baru</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('aspirasi.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-<form method="POST" action="{{ route('aspirasi.store') }}" class="bg-white p-8 rounded-lg shadow-md border border-gray-100 max-w-2xl">
-    @csrf
-    
-    <label class="block mb-2 font-semibold text-gray-700">Pilih Kategori</label>
-    <select name="kategori_id" class="w-full p-3 border border-gray-300 rounded-lg mb-6 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-400 focus:outline-none transition" required>
-        <option value="">-- Silakan Pilih Kategori --</option>
-        @foreach($kategori as $k)
-            <option value="{{ $k->id }}">{{ $k->ket_kategori }}</option>
-        @endforeach
-    </select>
-    
-    <label class="block mb-2 font-semibold text-gray-700">Dimana Lokasinya?</label>
-    <input type="text" name="lokasi" placeholder="Misal: Toilet Lantai 2" class="w-full p-3 border border-gray-300 rounded-lg mb-6 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-400 focus:outline-none transition" required>
-    
-    <label class="block mb-2 font-semibold text-gray-700">Jelaskan Permasalahannya</label>
-    <textarea name="keterangan" rows="5" placeholder="Keran air bocor dan lantai licin..." class="w-full p-3 border border-gray-300 rounded-lg mb-6 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-400 focus:outline-none transition" required></textarea>
-    
-    <div class="flex space-x-3 mt-2">
-        <button type="submit" class="flex-1 bg-blue-600 text-white font-bold px-4 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-300">
-            Kirim Aspirasi Sekarang
-        </button>
-        <a href="{{ route('aspirasi.index') }}" class="bg-gray-300 text-gray-700 font-bold px-6 py-3 rounded-lg shadow hover:bg-gray-400 transition text-center duration-300">
-            Batal
-        </a>
+                        <div class="mb-3">
+                            <label for="kategori_id" class="form-label">Kategori Aspirasi</label>
+                            <select name="kategori_id" id="kategori_id" class="form-select @error('kategori_id') is-invalid @enderror" required>
+                                <option value="" selected disabled>-- Pilih Kategori --</option>
+                                @foreach($kategori as $k)
+                                    <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                                @endforeach
+                            </select>
+                            @error('kategori_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="lokasi" class="form-label">Lokasi Kejadian</label>
+                            <input type="text" name="lokasi" id="lokasi" class="form-control @error('lokasi') is-invalid @enderror" 
+                                   value="{{ old('lokasi') }}" placeholder="Contoh: Kantin, Lab RPL, Parkiran" required>
+                            @error('lokasi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="keterangan" class="form-label">Detail Aspirasi</label>
+                            <textarea name="keterangan" id="keterangan" rows="5" class="form-control @error('keterangan') is-invalid @enderror" 
+                                      placeholder="Ceritakan detail aspirasi atau keluhan Anda..." required>{{ old('keterangan') }}</textarea>
+                            @error('keterangan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="foto" class="form-label">Foto Bukti (Opsional)</label>
+                            <input type="file" name="foto" id="foto" class="form-control @error('foto') is-invalid @enderror" accept="image/*">
+                            <div class="form-text">Format: JPG, JPEG, PNG. Maksimal ukuran 2MB.</div>
+                            @error('foto')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="d-flex justify-content-between pt-3">
+                            <a href="{{ route('aspirasi.index') }}" class="btn btn-secondary">Kembali</a>
+                            <button type="submit" class="btn btn-primary px-4">Kirim Aspirasi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>
 @endsection
