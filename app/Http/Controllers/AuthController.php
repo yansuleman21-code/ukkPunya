@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Aspirasi;
 
 class AuthController extends Controller
 {
@@ -55,13 +57,21 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    // Menampilkan Dashboard Admin
     public function adminDashboard()
     {
-        return view('admin.dashboard');
+        $totalAspirasi = Aspirasi::count();
+        $belumDitanggapi = Aspirasi::where('status', 'menunggu')->count();
+
+        $kategoriTerbanyak = Aspirasi::select('kategori_id', DB::raw('count(*) as total'))
+            ->groupBy('kategori_id')
+            ->with('kategori')
+            ->orderBy('total', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('admin.dashboard', compact('totalAspirasi', 'belumDitanggapi', 'kategoriTerbanyak'));
     }
 
-    // Menampilkan Dashboard Siswa
     public function siswaDashboard()
     {
         return view('siswa.dashboard');
