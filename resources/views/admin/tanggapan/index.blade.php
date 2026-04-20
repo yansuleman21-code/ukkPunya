@@ -31,14 +31,14 @@
                 <td class="p-4 text-center">
                     <span class="px-3 py-1 text-xs font-bold rounded-full text-white shadow-sm
                         {{ $d->status == 'menunggu' ? 'bg-orange-500' : '' }}
-                        {{ $d->status == 'proses' ? 'bg-blue-500' : '' }}
+                        {{ $d->status == 'proses' ? 'bg-pink-500' : '' }}
                         {{ $d->status == 'selesai' ? 'bg-green-500' : '' }}
                     ">
                         {{ strtoupper($d->status) }}
                     </span>
                 </td>
                 <td class="p-4 text-center">
-                    <a href="{{ route('tanggapan.show', $d->id) }}" class="inline-block bg-blue-600 font-semibold px-4 py-2 rounded-lg shadow text-white hover:bg-blue-700 transition">
+                    <a href="{{ route('tanggapan.show', $d->id) }}" class="inline-block bg-pink-600 font-semibold px-4 py-2 rounded-lg shadow text-white hover:bg-pink-700 transition">
                         Tanggapi
                     </a>
                 </td>

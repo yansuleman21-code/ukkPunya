@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Aspirasi;
+use App\Models\User;
+use App\Models\Siswa;
 
 class AuthController extends Controller
 {
@@ -44,6 +47,38 @@ class AuthController extends Controller
         return back()->withErrors([
             'username' => 'Username atau password salah.',
         ])->onlyInput('username');
+    }
+
+    // Menampilkan form register
+    public function showRegister()
+    {
+        return view('auth.register');
+    }
+
+    // Memproses data register (akun siswa baru)
+    public function register(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|max:50|unique:users,username',
+            'password' => 'required|string|min:6|confirmed',
+            'nis' => 'required|string|max:10|unique:siswas,nis',
+            'kelas' => 'required|string|max:10',
+        ]);
+
+        // Buat user baru
+        $user = User::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+        ]);
+
+        // Buat data siswa yang terhubung ke user
+        Siswa::create([
+            'user_id' => $user->id,
+            'nis' => $request->nis,
+            'kelas' => $request->kelas,
+        ]);
+
+        return redirect()->route('login')->with('success', 'Akun berhasil dibuat! Silakan login.');
     }
 
     // Menangani Logout

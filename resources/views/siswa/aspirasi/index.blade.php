@@ -3,7 +3,7 @@
 @section('content')
 <h2 class="text-3xl font-extrabold mb-6 text-gray-800 border-b pb-3">Data Aspirasi Saya</h2>
 
-<a href="{{ route('aspirasi.create') }}" class="inline-block bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition duration-300">
+<a href="{{ route('aspirasi.create') }}" class="inline-block bg-pink-600 text-white font-semibold px-5 py-2 rounded-lg shadow hover:bg-pink-700 transition duration-300">
     + Buat Aspirasi Baru
 </a>
 
@@ -33,7 +33,7 @@
                 <td class="p-4 text-center">
                     <span class="px-3 py-1 text-xs font-bold rounded-full text-white shadow-sm
                         {{ $d->status == 'menunggu' ? 'bg-orange-500' : '' }}
-                        {{ $d->status == 'proses' ? 'bg-blue-500' : '' }}
+                        {{ $d->status == 'proses' ? 'bg-pink-500' : '' }}
                         {{ $d->status == 'selesai' ? 'bg-green-500' : '' }}
                     ">
                         {{ strtoupper($d->status) }}
