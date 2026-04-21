@@ -9,7 +9,7 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .hero-overlay {
-            background: linear-gradient(135deg, rgba(157, 23, 77, 0.85) 0%, rgba(219, 39, 119, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(252, 189, 214, 0.85) 0%, rgba(255, 192, 220, 0.7) 100%);
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.12);
@@ -53,10 +53,10 @@
             <h1 class="animate-fade-in-up text-5xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
                 SMKN 1 Limboto
             </h1>
-            <p class="animate-fade-in-up animate-delay-1 text-xl md:text-2xl font-medium text-pink-100 mb-3">
+            <p class="animate-fade-in-up animate-delay-1 text-xl md:text-2xl font-medium text-with-100 mb-3">
                 {{ config('app.name') }} - Sistem Pengaduan & Aspirasi Siswa
             </p>
-            <p class="animate-fade-in-up animate-delay-2 text-pink-200 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p class="animate-fade-in-up animate-delay-2 text-white-200 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
                 Sampaikan keluhan, masukan, atau saran Anda demi lingkungan sekolah yang lebih baik. 
                 Kami siap menampung dan menindak lanjuti setiap aspirasi secara profesional dan transparan.
             </p>
@@ -137,20 +137,76 @@
         </div>
     </section>
 
-    <!-- ===== GALERI / GAMBAR SECTION ===== -->
     <section class="py-20 px-6 bg-gradient-to-br from-pink-50 to-rose-50">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold text-gray-800 mb-4">Galeri Sekolah</h2>
-                <div class="w-20 h-1.5 bg-pink-600 rounded-full mx-auto"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="rounded-2xl overflow-hidden shadow-xl">
-                    <img src="{{ asset('images/smealUkk.jpg') }}" alt="Gedung SMKN 1 Limboto" class="w-full h-72 object-cover hover:scale-105 transition duration-500">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-extrabold text-gray-800 mb-4">Galeri Sekolah</h2>
+            <div class="w-20 h-1.5 bg-pink-600 rounded-full mx-auto"></div>
+        </div>
+
+        <div class="relative w-full overflow-hidden rounded-2xl shadow-2xl group" id="galeri-container">
+            
+            <div class="flex transition-transform duration-500 ease-in-out" id="slider-wrapper">
+
+                <div class="w-full flex-shrink-0">
+                    <img src="{{ asset('images/smealUkk.jpg') }}" alt="Gedung SMKN 1 Limboto" class="w-full h-[450px] object-cover">
+                </div>
+
+                <div class="w-full flex-shrink-0">
+                    <img src="{{ asset('images/ukk1.jpeg') }}" alt="Gedung SMKN 1 Limboto" class="w-full h-[450px] object-cover">
+                </div>
+
+                <div class="w-full flex-shrink-0">
+                    <img src="{{ asset('images/ukk2.jpg') }}" alt="Gedung SMKN 1 Limboto" class="w-full h-[450px] object-cover">
+                </div>
+
+                <div class="w-full flex-shrink-0">
+                    <img src="{{ asset('images/ukk3.png') }}" alt="Gedung SMKN 1 Limboto" class="w-full h-[450px] object-cover">
                 </div>
             </div>
+
+            <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-pink-600 hover:text-white text-gray-800 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+
+            <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-pink-600 hover:text-white text-gray-800 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
         </div>
-    </section>
+
+    </div>
+
+    <script>
+        const wrapper = document.getElementById('slider-wrapper');
+        const slides = wrapper.children;
+        let currentIndex = 0;
+
+        // Fungsi untuk menggeser wrapper
+        function updateSlider() {
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Fungsi Tombol Next
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+        }
+
+        // Fungsi Tombol Prev
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        // Opsional: Membuat gambar bergeser otomatis setiap 4 detik (4000 ms)
+        // Hapus baris di bawah ini jika tidak ingin bergeser otomatis
+        setInterval(nextSlide, 4000);
+    </script>
+</section>
 
     <!-- ===== MAP SECTION ===== -->
     <section class="py-20 px-6 bg-white">

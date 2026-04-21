@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="bg-pink-50 border-l-8 border-pink-600 p-8 rounded-xl shadow-sm mb-8 relative overflow-hidden">
-    <!-- Hiasan Lingkaran di Background -->
     <div class="absolute -right-10 -top-10 bg-pink-200 opacity-50 w-40 h-40 rounded-full"></div>
     <div class="relative z-10">
         <h2 class="text-4xl font-extrabold text-pink-900 mb-3">Selamat Datang, {{ auth()->user()->username }}! 👋</h2>
@@ -13,7 +12,7 @@
 </div>
 
 <div class="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 text-center">
-    <!-- Gambar Ilustrasi (Pakai link online agar langsung muncul) -->
+
     <img src="https://cdni.iconscout.com/illustration/premium/thumb/student-studying-online-4438318-3718491.png" alt="Welcome" class="h-64 mx-auto mb-8 opacity-90 drop-shadow-md">
     
     <h3 class="text-3xl font-bold text-gray-800 mb-4">Sistem Pelaporan Aspirasi Sekolah</h3>
