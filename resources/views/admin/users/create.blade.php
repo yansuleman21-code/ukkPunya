@@ -53,6 +53,7 @@
             <div>
                 <label for="nis" class="block text-sm font-medium text-gray-700 mb-1">NIS</label>
                 <input type="text" name="nis" id="nis" value="{{ old('nis') }}" placeholder="Nomor Induk Siswa" maxlength="10"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" inputmode="numeric"
                     class="w-full border border-gray-300 rounded-md p-2.5 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition">
             </div>
             <div>

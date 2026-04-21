@@ -61,7 +61,7 @@ class AuthController extends Controller
         $request->validate([
             'username' => 'required|string|max:50|unique:users,username',
             'password' => 'required|string|min:6|confirmed',
-            'nis' => 'required|string|max:10|unique:siswas,nis',
+            'nis' => 'required|numeric|digits_between:1,10|unique:siswas,nis',
             'kelas' => 'required|string|max:10',
         ]);
 

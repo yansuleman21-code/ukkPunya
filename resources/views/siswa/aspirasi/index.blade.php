@@ -40,6 +40,9 @@
                     </span>
                 </td>
                 <td class="p-4 text-center flex justify-center space-x-2">
+                    <a href="{{ route('aspirasi.show', $d->id) }}" class="bg-blue-500 font-semibold px-3 py-1 rounded shadow text-white hover:bg-blue-600 transition">
+                        Detail
+                    </a>
                     <a href="{{ route('aspirasi.edit', $d->id) }}" class="bg-yellow-400 font-semibold px-3 py-1 rounded shadow text-white hover:bg-yellow-500 transition">
                         Edit
                     </a>

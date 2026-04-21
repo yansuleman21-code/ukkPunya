@@ -25,6 +25,17 @@
                 <td class="py-2 font-bold valign-top">Keterangan</td>
                 <td class="py-2 bg-white italic p-3 rounded border border-gray-200 mt-2 block w-full">{{ $data->keterangan }}</td>
             </tr>
+            @if($data->foto)
+            <tr>
+                <td class="py-2 font-bold valign-top">Bukti Foto</td>
+                <td class="py-2">
+                    <div class="mt-2">
+                        <img src="{{ asset('storage/' . $data->foto) }}" alt="Bukti Foto" class="max-w-full h-auto rounded-lg border border-gray-300 shadow-sm hover:scale-[1.02] transition duration-300 cursor-pointer" onclick="window.open(this.src)">
+                        <p class="text-xs text-gray-500 mt-1 italic">* Klik gambar untuk memperbesar</p>
+                    </div>
+                </td>
+            </tr>
+            @endif
             <tr>
                 <td class="py-3 font-bold">Status Saat Ini</td>
                 <td class="py-3">

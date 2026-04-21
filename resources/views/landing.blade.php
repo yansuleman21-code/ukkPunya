@@ -35,7 +35,7 @@
 </head>
 <body class="bg-gray-50 antialiased">
 
-    <!-- ===== HERO SECTION ===== -->
+    <!-- HERO SECTION  -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0">

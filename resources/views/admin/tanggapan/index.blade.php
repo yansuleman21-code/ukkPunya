@@ -14,9 +14,11 @@
         <thead class="bg-gray-100 border-b border-gray-300 text-gray-700 text-left">
             <tr>
                 <th class="p-4 w-16 text-center">No</th>
+                <th class="p-4">Nama Siswa</th>
                 <th class="p-4 text-center">NIS Siswa</th>
                 <th class="p-4">Kategori</th>
                 <th class="p-4">Lokasi</th>
+                <th class="p-4 text-center">Bukti</th>
                 <th class="p-4 text-center">Status</th>
                 <th class="p-4 text-center">Aksi</th>
             </tr>
@@ -25,9 +27,17 @@
             @foreach($data as $d)
             <tr class="border-b hover:bg-gray-50 transition duration-200">
                 <td class="p-4 text-center">{{ $loop->iteration }}</td>
+                <td class="p-4">{{ $d->siswa->user->username ?? '-' }}</td>
                 <td class="p-4 text-center font-bold text-gray-800">{{ $d->siswa->nis ?? '-' }}</td>
                 <td class="p-4 text-sm font-semibold">{{ $d->kategori->ket_kategori ?? '-' }}</td>
                 <td class="p-4 text-sm">{{ $d->lokasi }}</td>
+                <td class="p-4 text-center">
+                    @if($d->foto)
+                        <span class="text-pink-600 font-bold" title="Ada Foto Bukti">📷</span>
+                    @else
+                        <span class="text-gray-300">-</span>
+                    @endif
+                </td>
                 <td class="p-4 text-center">
                     <span class="px-3 py-1 text-xs font-bold rounded-full text-white shadow-sm
                         {{ $d->status == 'menunggu' ? 'bg-orange-500' : '' }}

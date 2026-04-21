@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/aspirasi', [AspirasiController::class, 'index'])->name('aspirasi.index');
         Route::get('/aspirasi/create', [AspirasiController::class, 'create'])->name('aspirasi.create');
         Route::post('/aspirasi', [AspirasiController::class, 'store'])->name('aspirasi.store');
+        Route::get('/aspirasi/{id}', [AspirasiController::class, 'show'])->name('aspirasi.show');
         Route::get('/aspirasi/{id}/edit', [AspirasiController::class, 'edit'])->name('aspirasi.edit');
         Route::put('/aspirasi/{id}', [AspirasiController::class, 'update'])->name('aspirasi.update');
         Route::delete('/aspirasi/{id}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');

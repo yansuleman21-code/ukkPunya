@@ -31,7 +31,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6',
             'role' => 'required|in:admin,siswa',
             'nama' => 'required_if:role,admin|nullable|string|max:20',
-            'nis' => 'required_if:role,siswa|nullable|string|max:10|unique:siswas,nis',
+            'nis' => 'required_if:role,siswa|nullable|numeric|digits_between:1,10|unique:siswas,nis',
             'kelas' => 'required_if:role,siswa|nullable|string|max:10',
         ]);
 
@@ -73,7 +73,7 @@ class UserController extends Controller
             'username' => 'required|string|max:50|unique:users,username,' . $user->id,
             'password' => 'nullable|string|min:6',
             'nama' => 'nullable|string|max:20',
-            'nis' => 'nullable|string|max:10|unique:siswas,nis,' . ($user->siswa->id ?? 'NULL'),
+            'nis' => 'nullable|numeric|digits_between:1,10|unique:siswas,nis,' . ($user->siswa->id ?? 'NULL'),
             'kelas' => 'nullable|string|max:10',
         ]);
 

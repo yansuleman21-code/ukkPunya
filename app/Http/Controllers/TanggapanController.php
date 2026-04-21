@@ -13,7 +13,7 @@ class TanggapanController extends Controller
     public function index()
     {
         // Menggunakan "with" untuk mencegah N+1 Query Problem (sangat efisien!)
-        $data = Aspirasi::with('siswa', 'kategori')->get();
+        $data = Aspirasi::with('siswa.user', 'kategori')->get();
         return view('admin.tanggapan.index', compact('data'));
     }
 

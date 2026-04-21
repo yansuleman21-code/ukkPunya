@@ -34,6 +34,7 @@
                 <div>
                     <label class="block text-gray-700 font-semibold mb-1 text-sm">NIS (Nomor Induk Siswa)</label>
                     <input type="text" name="nis" value="{{ old('nis') }}" placeholder="Contoh: 1234567890" required maxlength="10"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" inputmode="numeric"
                         class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition">
                 </div>
                 

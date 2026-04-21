@@ -121,4 +121,17 @@ class AspirasiController extends Controller
         
         return redirect()->route('aspirasi.index')->with('success', 'Aspirasi berhasil dihapus');
     }
+
+    // Detail aspirasi untuk siswa (untuk melihat tanggapan)
+    public function show($id)
+    {
+        $data = Aspirasi::with('tanggapan', 'kategori')->findOrFail($id);
+
+        // Pastikan aspirasi ini milik siswa yang login
+        if ($data->siswa_id !== Auth::user()->siswa->id) {
+            abort(403, 'Anda tidak berhak melihat aspirasi ini.');
+        }
+
+        return view('siswa.aspirasi.show', compact('data'));
+    }
 }
