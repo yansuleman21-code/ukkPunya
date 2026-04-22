@@ -12,7 +12,7 @@
     
     <div class="w-64 bg-pink-500 text-white p-5 shadow-lg">
         <div class="flex items-center justify-center gap-3 mb-8 border-b border-pink-400 pb-4">
-            <img src="{{ asset('images/logo.jpeg') }}" alt="Logo Sekolah" class="w-10 h-10 rounded-full bg-white p-0.5 shadow">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Sekolah" class="w-10 h-10 rounded-full bg-white p-0.5 shadow">
             <h2 class="text-2xl font-bold">e-Speak</h2>
         </div>
         

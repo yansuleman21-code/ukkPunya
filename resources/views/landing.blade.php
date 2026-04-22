@@ -47,7 +47,7 @@
         <div class="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
             <!-- Logo -->
             <div class="animate-fade-in-up mb-6">
-                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo SMKN 1 Limboto" class="w-24 h-24 mx-auto rounded-full border-4 border-white/30 shadow-2xl bg-white p-1">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo SMKN 1 Limboto" class="w-24 h-24 mx-auto rounded-full border-4 border-white/30 shadow-2xl bg-white p-1">
             </div>
 
             <h1 class="animate-fade-in-up text-5xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
