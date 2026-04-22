@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Rute Tanggapan
         Route::get('/tanggapan', [TanggapanController::class, 'index'])->name('tanggapan.index');
+        Route::get('/tanggapan/cetak', [TanggapanController::class, 'cetakLaporan'])->name('tanggapan.cetak');
         Route::get('/tanggapan/{id}', [TanggapanController::class, 'show'])->name('tanggapan.show');
         Route::post('/tanggapan/{id}', [TanggapanController::class, 'store'])->name('tanggapan.store');
 

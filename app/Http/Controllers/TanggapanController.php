@@ -6,15 +6,64 @@ use Illuminate\Http\Request;
 use App\Models\Aspirasi;
 use App\Models\Tanggapan;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TanggapanController extends Controller
 {
-    // Tampilkan semua aspirasi (untuk admin)
-    public function index()
+    // Tampilkan semua aspirasi (untuk admin) dengan filter bulan/tahun
+    public function index(Request $request)
     {
-        // Menggunakan "with" untuk mencegah N+1 Query Problem (sangat efisien!)
-        $data = Aspirasi::with('siswa.user', 'kategori')->get();
-        return view('admin.tanggapan.index', compact('data'));
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+
+        $query = Aspirasi::with('siswa.user', 'kategori');
+
+        if ($bulan) {
+            $query->whereMonth('created_at', $bulan);
+        }
+        if ($tahun) {
+            $query->whereYear('created_at', $tahun);
+        }
+
+        $data = $query->latest()->get();
+        return view('admin.tanggapan.index', compact('data', 'bulan', 'tahun'));
+    }
+
+    // Fungsi Cetak Laporan PDF
+    public function cetakLaporan(Request $request)
+    {
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+
+        $query = Aspirasi::with('siswa.user', 'kategori');
+
+        if ($bulan) {
+            $query->whereMonth('created_at', $bulan);
+        }
+        if ($tahun) {
+            $query->whereYear('created_at', $tahun);
+        }
+
+        $data = $query->latest()->get();
+
+        $pdf = Pdf::loadView('admin.tanggapan.pdf', compact('data', 'bulan', 'tahun'))
+                  ->setPaper('a4', 'landscape');
+        
+        $filename = 'Laporan_Pengaduan';
+        if ($bulan && $tahun) {
+            $namaBulan = \DateTime::createFromFormat('!m', $bulan)->format('F');
+            $filename .= "_{$namaBulan}_{$tahun}";
+        } elseif ($bulan) {
+            $namaBulan = \DateTime::createFromFormat('!m', $bulan)->format('F');
+            $filename .= "_{$namaBulan}";
+        } elseif ($tahun) {
+            $filename .= "_{$tahun}";
+        } else {
+            $filename .= "_Keseluruhan";
+        }
+        $filename .= '.pdf';
+        
+        return $pdf->download($filename);
     }
 
     // Detail aspirasi + Form untuk memberikan tanggapan
